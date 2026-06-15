@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="conteiner mt-6">
+  <h3 class="display-4">Editar Categoria</h3>
+
+  <div class="card">
+    <div class="card-bory">
+      <form method="post" class="form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">
+          Salvar Categoria
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <a href="{% url 'category_list' %}"
+     class="btn btn-dark border border-secondary px-4 py-2 rounded-3 mt-3 shadow-sm">
+    <i class="bi bi-arrow-left-short fs-5"></i>
+    Voltar para Categorias
+  </a>
+
+</div>
+
+{% endblock %}

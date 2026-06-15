@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-4">
+  <h3 class="display-6">Detalhes da Saída</h3>
+
+  <div class="card">
+    <div class="card-body">
+      <h3 class="card-title">{{ object.product }}</h3>
+      <p class="card-text">Quantidade: <strong>{{ object.quantity }}</strong></p>
+      <p class="card-text">{{ object.descripton}}</p>
+    </div>
+  </div>
+  <a href="{% url 'outflow_list' %}" class="btn btn-dark border border-secondary px-4 py-2 rounded-3 mt-3 shadow-sm">
+    <i class="bi bi-arrow-left-short fs-5"></i>
+    Voltar para lista de Saída
+</a>
+</div>
+
+{% endblock  %}
+

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-4">
+  <h3 class="display-6">Detalhes do Fornecedor</h3>
+
+  <div class="card">
+    <div class="card-body">
+      <h3 class="card-title">{{ object.name }}</h3>
+      <p class="card-text">{{ object.descriptions }}</p>
+    </div>
+  </div>
+  <a href="{% url 'supplier_list' %}" class="btn btn-dark border border-secondary px-4 py-2 rounded-3 mt-3 shadow-sm">
+    <i class="bi bi-arrow-left-short fs-5"></i>
+    Voltar para lista de Fornecedores
+</a>
+</div>
+
+{% endblock  %}
+

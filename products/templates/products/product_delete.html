@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+  <h3 class="display-6">Deletar Produto</h3>
+
+  <div class="card">
+    <div class="card-body">
+
+      <p class="card-text">
+        Tem certeza que deseja deletar o produto
+        <strong>{{ object.title }}</strong>?
+      </p>
+
+      <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">
+          Deletar
+        </button>
+      </form>
+
+      <a href="{% url 'product_list' %}"
+         class="btn btn-dark border border-secondary px-4 py-2 rounded-3 mt-3 shadow-sm">
+        <i class="bi bi-arrow-left-short fs-5"></i>
+        Voltar para produtos
+      </a>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}
