@@ -9,4 +9,4 @@ def updat_product_quantity(sender, instance, created, **kwargs):
         if instance.quantity > 0:
             product = instance.product
             product.quantity -= instance.quantity
-            product.save() 
+            product.save()

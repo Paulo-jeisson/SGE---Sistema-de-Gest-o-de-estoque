@@ -1,9 +1,9 @@
-from django import forms  
+from django import forms
 from . import models
 
 
 class CategoryForm(forms.ModelForm):
-    
+
     class Meta:
         model = models.Category
         fields = ['name', 'description']
@@ -13,5 +13,5 @@ class CategoryForm(forms.ModelForm):
         }
         labels = {
             'name': 'Nome',
-            'description': 'descrição',
+            'description': 'descriÃ§Ã£o',
         }

@@ -1,32 +1,46 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from rest_framework import generics
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView
-from . import models, forms
+from . import models, forms, serializers
 
 
-class InflowListView(LoginRequiredMixin, ListView):
+class InflowListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = models.Inflow
     template_name = 'inflows/inflow_list.html'
     context_object_name = 'inflows'
     paginate_by = 3
-
+    permission_required = 'inflows.view_inflow'
 
     def get_queryset(self):
-        queryset =  super().get_queryset()
+        queryset = super().get_queryset()
         product = self.request.GET.get('product')
-        
+
         if product:
             queryset = queryset.filter(product__title__icontains=product)
-            
+
         return queryset
-    
-class InflowCreateView(LoginRequiredMixin, CreateView):
+
+
+class InflowCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = models.Inflow
     template_name = 'inflows/inflow_create.html'
     form_class = forms.InflowForm
     success_url = reverse_lazy('inflow_list')
-    
-class InflowDetailView(LoginRequiredMixin, DetailView):
+    permission_required = 'inflows.add_inflow'
+
+
+class InflowDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = models.Inflow
     template_name = 'inflows/inflow_detail.html'
-    
+    permission_required = 'inflows.view_inflow'
+
+
+class InflowCreateListAPIView(generics.ListCreateAPIView):
+    queryset = models.Inflow.objects.all()
+    serializer_class = serializers.InflowSerializer
+
+
+class InflowRetrieveAPIView(generics.RetrieveAPIView):
+    queryset = models.Inflow.objects.all()
+    serializer_class = serializers.InflowSerializer

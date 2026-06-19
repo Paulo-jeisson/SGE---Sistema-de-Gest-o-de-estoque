@@ -1,12 +1,12 @@
-from django import forms  
+from django import forms
 from . import models
 
 
 class InflowForm(forms.ModelForm):
-    
+
     class Meta:
         model = models.Inflow
-        fields = ['supplier', 'product', 'quantity', 'descripton' ]
+        fields = ['supplier', 'product', 'quantity', 'descripton']
         widgets = {
             'supplier': forms.Select(attrs={'class': 'form-control'}),
             'product': forms.Select(attrs={'class': 'form-control'}),
@@ -17,5 +17,5 @@ class InflowForm(forms.ModelForm):
             'supplier': 'Fornecedor',
             'product': 'Produto',
             'quantity': 'Quantidade',
-            'descripton': 'Descrição',
+            'descripton': 'DescriÃ§Ã£o',
         }

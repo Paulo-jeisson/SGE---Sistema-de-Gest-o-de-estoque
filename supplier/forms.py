@@ -1,9 +1,9 @@
-from django import forms  
+from django import forms
 from . import models
 
 
 class SupplierForm(forms.ModelForm):
-    
+
     class Meta:
         model = models.Supplier
         fields = ['name', 'descriptions']
@@ -13,5 +13,5 @@ class SupplierForm(forms.ModelForm):
         }
         labels = {
             'name': 'Nome',
-            'descriptions': 'descrição',
+            'descriptions': 'descriÃ§Ã£o',
         }

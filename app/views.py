@@ -1,7 +1,22 @@
 import json
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 from django.shortcuts import render
 from . import metrics
+
+
+def service_worker(request):
+    content = """
+self.addEventListener('install', function(event) {
+  self.skipWaiting();
+});
+
+self.addEventListener('activate', function(event) {
+  event.waitUntil(self.clients.claim());
+});
+""".strip()
+    return HttpResponse(content, content_type='application/javascript')
+
 
 @login_required(login_url='login')
 def home(request):
@@ -11,16 +26,13 @@ def home(request):
     daily_sales_quantity_data = metrics.get_daily_sales_quantity_data()
     graphic_product_category_metric = metrics.get_graphic_product_category_metric()
     graphic_product_brand_metric = metrics.get_graphic_product_brand_metric()
-    
+
     context = {
-        'product_metrics' : product_metrics,
-        'sales_metrics' : sales_metrics,
-        'daily_sales_data' :json.dumps(daily_sales_data),
-        'daily_sales_quantity_data' : json.dumps(daily_sales_quantity_data),
-        'product_count_by_category' : json.dumps(graphic_product_category_metric),
-        'product_count_by_brand' : json.dumps(graphic_product_brand_metric),
+        'product_metrics': product_metrics,
+        'sales_metrics': sales_metrics,
+        'daily_sales_data': json.dumps(daily_sales_data),
+        'daily_sales_quantity_data': json.dumps(daily_sales_quantity_data),
+        'product_count_by_category': json.dumps(graphic_product_category_metric),
+        'product_count_by_brand': json.dumps(graphic_product_brand_metric),
     }
     return render(request, 'home.html', context)
-
-
-

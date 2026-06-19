@@ -1,9 +1,9 @@
-from django import forms  
+from django import forms
 from . import models
 
 
 class BrandForm(forms.ModelForm):
-    
+
     class Meta:
         model = models.Brand
         fields = ['name', 'description']
@@ -13,5 +13,5 @@ class BrandForm(forms.ModelForm):
         }
         labels = {
             'name': 'Nome',
-            'description': 'descrição',
+            'description': 'descriÃ§Ã£o',
         }

@@ -1,12 +1,12 @@
-from django import forms  
+from django import forms
 from . import models
 
 
 class ProductForm(forms.ModelForm):
-    
+
     class Meta:
         model = models.Product
-        fields = ['title', 'category', 'brand', 'description', 'serie_number', 
+        fields = ['title', 'category', 'brand', 'description', 'serie_number',
                   'cost_price', 'selling_price']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
@@ -21,8 +21,8 @@ class ProductForm(forms.ModelForm):
             'title': 'Titulo',
             'category': 'Categoria',
             'brand': 'Marca',
-            'descripton': 'Descrição',
-            'serie_number': 'Número de série',
-            'cost_price': 'Preço de custo',
-            'selling_price': 'Preço de venda',
+            'descripton': 'DescriÃ§Ã£o',
+            'serie_number': 'NÃºmero de sÃ©rie',
+            'cost_price': 'PreÃ§o de custo',
+            'selling_price': 'PreÃ§o de venda',
         }
