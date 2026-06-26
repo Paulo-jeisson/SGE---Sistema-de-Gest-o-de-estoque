@@ -1,0 +1,23 @@
+services:
+
+    sge_web:
+        build: .  # Constrói a imagem a partir do Dockerfile no diretório atual
+        restart: always # Reinicia o contêiner automaticamente se ele falhar
+        ports:
+            - 8080:8080 # Mapeia a porta 8080 do host para a porta 8080 do contêiner
+        depends_on:
+            - sge_db # Garante que o serviço sge_db seja iniciado antes do sge_web
+
+    sge_db:
+        image: postgres:15 # Usa a imagem oficial do PostgreSQL versão 15
+        ports:
+            - 5432:5432 # Mapeia a porta 5432 do host para a porta 5432 do contêiner
+        volumes:
+            - postgres_data:/var/lib/postgresql/data/ # Monta um volume para persistência de dados
+        environment:
+             - POSTGRES_USER=postgres # Define o usuário do banco de dados
+             - POSTGRES_PASSWORD=postgres # Define a senha do banco de dados
+             - POSTGRES_DB=sge # Define o nome do banco de dados
+
+volumes:
+    postgres_data: # Define um volume nomeado para persistência de dados do PostgreSQL
